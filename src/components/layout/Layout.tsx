@@ -1,39 +1,21 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
-import Sidebar from './Sidebar';
 import Header from './Header';
 import { useAuth } from '@/context/AuthContext';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { 
+  SidebarProvider, 
+  Sidebar, 
+  SidebarContent,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarInset,
+  SidebarRail
+} from '@/components/ui/sidebar';
+import MainSidebar from './MainSidebar';
 
 const Layout = () => {
   const { isAuthenticated, isLoading } = useAuth();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const isMobile = useIsMobile();
-
-  const toggleMobileSidebar = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  useEffect(() => {
-    if (!isMobile) {
-      setMobileOpen(false);
-    }
-  }, [isMobile]);
-
-  // Close sidebar when clicking on a link (mobile)
-  useEffect(() => {
-    const handleRouteChange = () => {
-      if (isMobile) {
-        setMobileOpen(false);
-      }
-    };
-
-    window.addEventListener('popstate', handleRouteChange);
-    return () => {
-      window.removeEventListener('popstate', handleRouteChange);
-    };
-  }, [isMobile]);
 
   if (isLoading) {
     return (
@@ -51,21 +33,20 @@ const Layout = () => {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
-      <Sidebar 
-        isMobile={isMobile} 
-        mobileOpen={mobileOpen} 
-        toggleMobileSidebar={toggleMobileSidebar} 
-      />
-      
-      <div className="flex flex-col flex-1 w-full overflow-hidden">
-        <Header toggleMobileSidebar={toggleMobileSidebar} />
+    <SidebarProvider defaultOpen={true}>
+      <div className="flex min-h-svh w-full">
+        <MainSidebar />
         
-        <main className="flex-1 overflow-auto p-4 lg:p-6 bg-background animate-fade-in">
-          <Outlet />
-        </main>
+        <SidebarInset className="flex flex-col">
+          <Header />
+          <main className="flex-1 overflow-auto p-4 lg:p-6 bg-background animate-fade-in">
+            <Outlet />
+          </main>
+        </SidebarInset>
+        
+        <SidebarRail />
       </div>
-    </div>
+    </SidebarProvider>
   );
 };
 
