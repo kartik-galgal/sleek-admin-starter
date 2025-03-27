@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -343,7 +342,6 @@ const CalendarPage = () => {
       </div>
 
       <div className="grid lg:grid-cols-12 gap-6">
-        {/* Calendar View */}
         <Card className="lg:col-span-8 hover-lift">
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
@@ -403,7 +401,7 @@ const CalendarPage = () => {
                         "w-full h-full flex items-center justify-center",
                         selectedDate && isSameDay(date, selectedDate) && "bg-primary text-primary-foreground rounded-full"
                       )}>
-                        {props.children}
+                        {format(date, "d")}
                       </div>
                       {eventsOnDay.length > 0 && (
                         <div className="absolute bottom-1 flex gap-0.5 justify-center">
@@ -427,7 +425,6 @@ const CalendarPage = () => {
           </CardContent>
         </Card>
 
-        {/* Events for Selected Day */}
         <Card className="lg:col-span-4 hover-lift">
           <CardHeader>
             <CardTitle>Events for {format(selectedDate, 'MMMM d, yyyy')}</CardTitle>
@@ -499,7 +496,6 @@ const CalendarPage = () => {
         </Card>
       </div>
       
-      {/* View Event Dialog */}
       <Dialog open={isViewEventOpen} onOpenChange={setIsViewEventOpen}>
         <DialogContent className="sm:max-w-[500px]">
           {selectedEvent && (
