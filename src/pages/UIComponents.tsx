@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Card, CardContent, CardDescription, 
@@ -558,7 +557,7 @@ const UIComponents = () => {
                   <Button
                     variant="outline"
                     onClick={() => {
-                      toast.success("Top", { position: "top" });
+                      toast.success("Top", { position: "top-center" });
                     }}
                   >
                     Top

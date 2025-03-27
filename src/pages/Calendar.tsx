@@ -22,7 +22,7 @@ import { toast } from 'sonner';
 import { 
   CalendarIcon, ChevronLeft, ChevronRight, 
   Plus, Clock, MapPin, Users, CalendarDays,
-  Check, X
+  Check, X, Trash2
 } from 'lucide-react';
 
 // Types
@@ -403,7 +403,7 @@ const CalendarPage = () => {
                         "w-full h-full flex items-center justify-center",
                         selectedDate && isSameDay(date, selectedDate) && "bg-primary text-primary-foreground rounded-full"
                       )}>
-                        {props.day}
+                        {props.children}
                       </div>
                       {eventsOnDay.length > 0 && (
                         <div className="absolute bottom-1 flex gap-0.5 justify-center">
