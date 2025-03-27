@@ -1,10 +1,14 @@
+
 import * as React from "react"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
 
-const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
+const Pagination = ({
+  className,
+  ...props
+}: React.ComponentProps<"nav">) => (
   <nav
     role="navigation"
     aria-label="pagination"
@@ -12,27 +16,23 @@ const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
     {...props}
   />
 )
-Pagination.displayName = "Pagination"
 
-const PaginationContent = React.forwardRef<
-  HTMLUListElement,
-  React.ComponentProps<"ul">
->(({ className, ...props }, ref) => (
+const PaginationContent = ({
+  className,
+  ...props
+}: React.ComponentProps<"ul">) => (
   <ul
-    ref={ref}
     className={cn("flex flex-row items-center gap-1", className)}
     {...props}
   />
-))
-PaginationContent.displayName = "PaginationContent"
+)
 
-const PaginationItem = React.forwardRef<
-  HTMLLIElement,
-  React.ComponentProps<"li">
->(({ className, ...props }, ref) => (
-  <li ref={ref} className={cn("", className)} {...props} />
-))
-PaginationItem.displayName = "PaginationItem"
+const PaginationItem = ({
+  className,
+  ...props
+}: React.ComponentProps<"li">) => (
+  <li className={cn("", className)} {...props} />
+)
 
 type PaginationLinkProps = {
   isActive?: boolean
@@ -57,7 +57,6 @@ const PaginationLink = ({
     {...props}
   />
 )
-PaginationLink.displayName = "PaginationLink"
 
 const PaginationPrevious = ({
   className,
@@ -73,7 +72,6 @@ const PaginationPrevious = ({
     <span>Previous</span>
   </PaginationLink>
 )
-PaginationPrevious.displayName = "PaginationPrevious"
 
 const PaginationNext = ({
   className,
@@ -89,7 +87,6 @@ const PaginationNext = ({
     <ChevronRight className="h-4 w-4" />
   </PaginationLink>
 )
-PaginationNext.displayName = "PaginationNext"
 
 const PaginationEllipsis = ({
   className,
@@ -104,7 +101,6 @@ const PaginationEllipsis = ({
     <span className="sr-only">More pages</span>
   </span>
 )
-PaginationEllipsis.displayName = "PaginationEllipsis"
 
 export {
   Pagination,
